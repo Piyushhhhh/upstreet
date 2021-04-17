@@ -18,7 +18,7 @@ class AlbumList extends StatefulWidget {
 class _AlbumListState extends State<AlbumList> {
   var albums = new List<Album>();
 
-  _getUsers() {
+  _getAlbum() {
     ApiService.getAlbums().then((response) {
       setState(() {
         Iterable list = json.decode(response.body);
@@ -29,7 +29,7 @@ class _AlbumListState extends State<AlbumList> {
 
   initState() {
     super.initState();
-    _getUsers();
+    _getAlbum();
   }
 
   dispose() {
