@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:upstreet_flutter_code_challenge/constants/strings.dart';
 import 'package:upstreet_flutter_code_challenge/models/albums.dart';
+import 'package:upstreet_flutter_code_challenge/screens/add_edit_album.dart';
 import 'package:upstreet_flutter_code_challenge/screens/album_detail.dart';
 import 'package:upstreet_flutter_code_challenge/services/api_service.dart';
 
@@ -77,7 +78,14 @@ class _AlbumListState extends State<AlbumList> {
           Icons.add,
           color: Colors.white,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddEditAlbum(),
+            ),
+          );
+        },
       ),
     );
   }

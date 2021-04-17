@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:upstreet_flutter_code_challenge/models/albums.dart';
+import 'package:upstreet_flutter_code_challenge/screens/add_edit_album.dart';
 
 class AlbumDetails extends StatelessWidget {
   final Album album;
@@ -36,7 +37,15 @@ class AlbumDetails extends StatelessWidget {
           Icons.edit,
           color: Colors.white,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) =>
+                  AddEditAlbum(fromAddButton: false, album: album),
+            ),
+          );
+        },
       ),
     );
   }
