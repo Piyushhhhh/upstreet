@@ -6,7 +6,7 @@ class AddEditAlbum extends StatefulWidget {
   final bool fromAddButton;
   final Album album;
 
-  AddEditAlbum({this.fromAddButton = true, @required this.album});
+  AddEditAlbum({this.fromAddButton = true, this.album});
 
   @override
   _AddEditAlbumState createState() => _AddEditAlbumState();
