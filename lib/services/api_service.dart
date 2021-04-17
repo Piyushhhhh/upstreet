@@ -32,9 +32,4 @@ class ApiService {
     }
     return completer.future;
   }
-
-  static Future getAlbums() {
-    var url = API_ALBUMS_PHOTOS;
-    return http.get(url);
-  }
 }

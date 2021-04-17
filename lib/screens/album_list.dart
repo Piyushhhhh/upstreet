@@ -1,7 +1,7 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:upstreet_flutter_code_challenge/constants/strings.dart';
 import 'package:upstreet_flutter_code_challenge/models/albums.dart';
+import 'package:upstreet_flutter_code_challenge/screens/album_detail.dart';
 import 'package:upstreet_flutter_code_challenge/services/api_service.dart';
 
 import '../models/albums.dart';
@@ -42,7 +42,7 @@ class _AlbumListState extends State<AlbumList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Album List'),
+        title: const Text(Strings.albumList),
       ),
       body: loading
           ? Center(
@@ -50,7 +50,7 @@ class _AlbumListState extends State<AlbumList> {
             )
           : (albums == null || albums.isEmpty)
               ? Center(
-                  child: Text('No Albums found'),
+                  child: Text(Strings.noAlbumsFound),
                 )
               : ListView.builder(
                   itemCount: albums.length,
@@ -60,11 +60,25 @@ class _AlbumListState extends State<AlbumList> {
                       child: ListTile(
                         leading: Image.network("${albums[index].thumbnailUrl}"),
                         title: Text(albums[index].title),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => AlbumDetails(albums[index]),
+                            ),
+                          );
+                        },
                       ),
                     );
                   },
                 ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+        onPressed: () {},
+      ),
     );
   }
 }
