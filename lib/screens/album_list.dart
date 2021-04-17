@@ -19,12 +19,12 @@ class AlbumList extends StatefulWidget {
 
 class _AlbumListState extends State<AlbumList> {
   List<Album> albums;
-  bool loading = true;
+  bool isLoading = true;
 
   _initAlbum() {
     ApiService.getAlbumsPhotos().then((List<Album> albums) {
       setState(() {
-        loading = false;
+        isLoading = false;
         this.albums = albums;
       });
     }).catchError((error) {
@@ -45,7 +45,7 @@ class _AlbumListState extends State<AlbumList> {
       appBar: AppBar(
         title: const Text(Strings.albumList),
       ),
-      body: loading
+      body: isLoading
           ? Center(
               child: CircularProgressIndicator(),
             )
@@ -65,7 +65,7 @@ class _AlbumListState extends State<AlbumList> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => AlbumDetails(albums[index]),
+                              builder: (context) => AlbumDetails(album:albums[index]),
                             ),
                           );
                         },

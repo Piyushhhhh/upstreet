@@ -4,7 +4,7 @@ import 'package:upstreet_flutter_code_challenge/screens/add_edit_album.dart';
 
 class AlbumDetails extends StatelessWidget {
   final Album album;
-  AlbumDetails(this.album);
+  AlbumDetails({@required this.album});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

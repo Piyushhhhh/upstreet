@@ -5,20 +5,23 @@ import 'package:upstreet_flutter_code_challenge/models/albums.dart';
 class AddEditAlbum extends StatefulWidget {
   final bool fromAddButton;
   final Album album;
-  AddEditAlbum({this.fromAddButton = true, this.album});
+
+  AddEditAlbum({this.fromAddButton = true, @required this.album});
 
   @override
   _AddEditAlbumState createState() => _AddEditAlbumState();
 }
 
 class _AddEditAlbumState extends State<AddEditAlbum> {
-  TextEditingController _albumCoverController;
-  TextEditingController _albumTitleController;
+  final TextEditingController _albumCoverController;
+  final TextEditingController _albumTitleController;
+
+  _AddEditAlbumState()
+      : _albumCoverController = TextEditingController(),
+        _albumTitleController = TextEditingController();
 
   @override
   void initState() {
-    _albumCoverController = TextEditingController();
-    _albumTitleController = TextEditingController();
     if (widget.fromAddButton == false) {
       _albumCoverController.text = widget.album.thumbnailUrl;
       _albumTitleController.text = widget.album.title;
