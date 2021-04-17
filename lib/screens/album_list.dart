@@ -2,12 +2,13 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:upstreet_flutter_code_challenge/models/albums.dart';
-import 'package:upstreet_flutter_code_challenge/services/api.dart';
+import 'package:upstreet_flutter_code_challenge/services/api_service.dart';
 
-import '../services/api.dart';
+import '../models/albums.dart';
+import '../services/api_service.dart';
 
 // TODO:
-// 1. Create a list view to display the album data from the fetching function in `api.dart`
+// 1. Create a list view to display the album data from the fetching function in `api_service.dart`
 // 2. The item of the list should contain the album's thumbnail and title
 
 class AlbumList extends StatefulWidget {
@@ -16,24 +17,25 @@ class AlbumList extends StatefulWidget {
 }
 
 class _AlbumListState extends State<AlbumList> {
-  var albums = new List<Album>();
+  List<Album> albums;
+  bool loading = true;
 
-  _getAlbum() {
-    ApiService.getAlbums().then((response) {
+  _initAlbum() {
+    ApiService.getAlbumsPhotos().then((List<Album> albums) {
       setState(() {
-        Iterable list = json.decode(response.body);
-        albums = list.map((model) => Album.fromJson(model)).toList();
+        loading = false;
+        this.albums = albums;
       });
+    }).catchError((error) {
+      print(error);
     });
   }
 
   initState() {
     super.initState();
-    _getAlbum();
-  }
-
-  dispose() {
-    super.dispose();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _initAlbum();
+    });
   }
 
   @override
@@ -42,19 +44,27 @@ class _AlbumListState extends State<AlbumList> {
       appBar: AppBar(
         title: const Text('Album List'),
       ),
-      body: ListView.builder(
-        itemCount: albums.length,
-        itemBuilder: (context, index) {
-          return Padding(
-            padding: const EdgeInsets.only(top: 9),
-            child: ListTile(
-              leading: Image.network("${albums[index].thumbnailUrl}"),
-              title: Text(albums[index].title),
-              onTap: () {},
-            ),
-          );
-        },
-      ),
+      body: loading
+          ? Center(
+              child: CircularProgressIndicator(),
+            )
+          : (albums == null || albums.isEmpty)
+              ? Center(
+                  child: Text('No Albums found'),
+                )
+              : ListView.builder(
+                  itemCount: albums.length,
+                  itemBuilder: (context, index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(top: 9),
+                      child: ListTile(
+                        leading: Image.network("${albums[index].thumbnailUrl}"),
+                        title: Text(albums[index].title),
+                        onTap: () {},
+                      ),
+                    );
+                  },
+                ),
     );
   }
 }
