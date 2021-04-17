@@ -45,12 +45,14 @@ class _AlbumListState extends State<AlbumList> {
       body: ListView.builder(
         itemCount: albums.length,
         itemBuilder: (context, index) {
-          return ListTile(
-//              leading: CircleAvatar(
-//                backgroundImage: Image.network(
-//                    src), // no matter how big it is, it won't overflow
-//              ),
-              title: Text(albums[index].title));
+          return Padding(
+            padding: const EdgeInsets.only(top: 9),
+            child: ListTile(
+              leading: Image.network("${albums[index].thumbnailUrl}"),
+              title: Text(albums[index].title),
+              onTap: () {},
+            ),
+          );
         },
       ),
     );
