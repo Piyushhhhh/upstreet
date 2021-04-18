@@ -32,4 +32,25 @@ class ApiService {
     }
     return completer.future;
   }
+
+  static editAlbum() async {
+    var completer = new Completer<List<Album>>();
+    try {
+      Map<String, String> headers = {
+        "Content-type": "application/json; charset=UTF-8"
+      };
+      String json =
+          '{ "albumId": 1,"id": 1, "title": "reprehenderit est deserunt velit ipsam", "url": "https://via.placeholder.com/600/771796", "thumbnailUrl": "thumbnailUrl"}';
+      await http
+          .put(API_ALBUMS_PHOTOS, headers: headers, body: json)
+          .then((response) {
+        print(response.statusCode);
+      });
+    } catch (error) {
+      print('b');
+
+      completer.completeError(ParsingException("Parsing failed at editAlbum"));
+    }
+    return completer.future;
+  }
 }

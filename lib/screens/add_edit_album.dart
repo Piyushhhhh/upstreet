@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:upstreet_flutter_code_challenge/constants/strings.dart';
 import 'package:upstreet_flutter_code_challenge/models/albums.dart';
+import 'package:upstreet_flutter_code_challenge/screens/album_list.dart';
+import 'package:upstreet_flutter_code_challenge/services/api_service.dart';
 
 class AddEditAlbum extends StatefulWidget {
   final bool fromAddButton;
@@ -83,7 +85,16 @@ class _AddEditAlbumState extends State<AddEditAlbum> {
           Icons.done,
           color: Colors.white,
         ),
-        onPressed: () {},
+        onPressed: () {
+          ApiService.editAlbum();
+          Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AlbumList(),
+            ),
+            (Route<dynamic> route) => false,
+          );
+        },
       ),
     );
   }

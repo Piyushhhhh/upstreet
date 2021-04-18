@@ -18,6 +18,6 @@ class Album {
         thumbnailUrl = json['thumbnailUrl'];
 
   Map toJson() {
-    return {'id': id, 'title': title, 'url': url, thumbnailUrl: 'thumbnailUrl'};
+    return {'id': id, 'title': title, 'url': url, 'thumbnailUrl': thumbnailUrl};
   }
 }
