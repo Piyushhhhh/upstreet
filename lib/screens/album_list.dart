@@ -55,7 +55,9 @@ class _AlbumListState extends State<AlbumList> {
                 )
               : ListView.separated(
                   itemCount: albums.length,
-                  separatorBuilder: (_,__)=>SizedBox(height: 8,),
+                  separatorBuilder: (_, __) => SizedBox(
+                    height: 8,
+                  ),
                   itemBuilder: (context, index) {
                     return ListTile(
                       leading: Image.network("${albums[index].thumbnailUrl}"),
@@ -64,7 +66,8 @@ class _AlbumListState extends State<AlbumList> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (context) => AlbumDetails(album:albums[index]),
+                            builder: (context) =>
+                                AlbumDetails(album: albums[index]),
                           ),
                         );
                       },
@@ -80,7 +83,9 @@ class _AlbumListState extends State<AlbumList> {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => AddEditAlbum(),
+              builder: (context) => AddEditAlbum(
+                albumLength: albums.length,
+              ),
             ),
           );
         },

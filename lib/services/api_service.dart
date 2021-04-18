@@ -33,14 +33,15 @@ class ApiService {
     return completer.future;
   }
 
-  static editAlbum() async {
+  static editAlbum(
+      int id, String title, String url, String thumbnailUrl) async {
     var completer = new Completer<List<Album>>();
     try {
       Map<String, String> headers = {
         "Content-type": "application/json; charset=UTF-8"
       };
       String json =
-          '{ "albumId": 1,"id": 1, "title": "reprehenderit est deserunt velit ipsam", "url": "https://via.placeholder.com/600/771796", "thumbnailUrl": "thumbnailUrl"}';
+          '{ "albumId": 1,"id": $id, "title": "$title", "url": "$url", "thumbnailUrl": "$thumbnailUrl"}';
       await http
           .put(API_ALBUMS_PHOTOS, headers: headers, body: json)
           .then((response) {

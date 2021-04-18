@@ -4,7 +4,7 @@ class Album {
   String url;
   String thumbnailUrl;
 
-  Album(int id, String name, String email) {
+  Album(int id, String title, String url, String thumbnailUrl) {
     this.id = id;
     this.title = title;
     this.url = url;

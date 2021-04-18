@@ -7,8 +7,9 @@ import 'package:upstreet_flutter_code_challenge/services/api_service.dart';
 class AddEditAlbum extends StatefulWidget {
   final bool fromAddButton;
   final Album album;
+  final int albumLength;
 
-  AddEditAlbum({this.fromAddButton = true, this.album});
+  AddEditAlbum({this.fromAddButton = true, this.album, this.albumLength});
 
   @override
   _AddEditAlbumState createState() => _AddEditAlbumState();
@@ -86,7 +87,17 @@ class _AddEditAlbumState extends State<AddEditAlbum> {
           color: Colors.white,
         ),
         onPressed: () {
-          ApiService.editAlbum();
+          widget.fromAddButton
+              ? ApiService.editAlbum(
+                  widget.albumLength + 1,
+                  _albumTitleController.text,
+                  _albumCoverController.text,
+                  _albumCoverController.text)
+              : ApiService.editAlbum(
+                  widget.album.id,
+                  _albumTitleController.text,
+                  _albumCoverController.text,
+                  _albumCoverController.text);
           Navigator.pushAndRemoveUntil(
             context,
             MaterialPageRoute(
